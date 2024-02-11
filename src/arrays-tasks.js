@@ -84,7 +84,7 @@ function findElement(arr, value) {
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
 function findAllOccurrences(arr, item) {
-  return arr.filter(el => el === item).length;
+  return arr.filter((el) => el === item).length;
 }
 
 /**
@@ -100,7 +100,7 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
 function removeFalsyValues(arr) {
-  const simbols = [false, null, 0, "", undefined, NaN];
+  const simbols = [false, null, 0, '', undefined, NaN];
   function search(elem) {
     return simbols.includes(elem) === false;
   }
@@ -118,7 +118,7 @@ function removeFalsyValues(arr) {
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-  return arr.map(elem => elem.length);
+  return arr.map((elem) => elem.length);
 }
 
 /**
@@ -138,10 +138,9 @@ function getStringsLength(arr) {
 function getAverage(arr) {
   if (!arr.length) {
     return 0;
-  } else {
-    let res = arr.reduce((sum, el) => sum + el, 0);
-    return +(res / arr.length).toFixed(2);
   }
+  const res = arr.reduce((sum, el) => sum + el, 0);
+  return +(res / arr.length).toFixed(2);
 }
 
 /**
@@ -155,7 +154,7 @@ function getAverage(arr) {
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
 function isSameLength(arr) {
-  return arr.every(elem => elem.length === arr[0].length);
+  return arr.every((elem) => elem.length === arr[0].length);
 }
 
 /**
@@ -170,7 +169,9 @@ function isSameLength(arr) {
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
 function isValueEqualsIndex(arr) {
-  function search(value, index) { return value === index };
+  function search(value, index) {
+    return value === index;
+  }
   return arr.some(search);
 }
 
@@ -264,7 +265,7 @@ function toStringList(arr) {
  */
 function distinct(arr) {
   const res = new Set();
-  arr.map(elem => res.add(elem));
+  arr.map((elem) => res.add(elem));
   return Array.from(res);
 }
 
@@ -282,8 +283,10 @@ function distinct(arr) {
  *    createNDimensionalArray(1, 1) => [0]
  */
 function createNDimensionalArray(n, size) {
-  let arr = new Array(size).fill();
-  return n - 1 === 0 ? Array(size).fill(0) : arr.map(elem => createNDimensionalArray(n - 1, size));
+  const arr = new Array(size).fill();
+  return n - 1 === 0
+    ? Array(size).fill(0)
+    : arr.map(() => createNDimensionalArray(n - 1, size));
 }
 
 /**
@@ -332,7 +335,9 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([]) => 0
  */
 function calculateBalance(arr) {
-  return arr.length === 0 ? 0 : arr.reduce((acc, el) => acc + (el[0] - el[1]), 0);
+  return arr.length === 0
+    ? 0
+    : arr.reduce((acc, el) => acc + (el[0] - el[1]), 0);
 }
 
 /**
@@ -348,7 +353,9 @@ function calculateBalance(arr) {
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
 function createChunks(arr, chunkSize) {
-  return Array.from({ length: Math.ceil(arr.length / chunkSize) }, (v, k) => arr.slice(k * chunkSize, k * chunkSize + chunkSize))
+  return Array.from({ length: Math.ceil(arr.length / chunkSize) }, (v, k) =>
+    arr.slice(k * chunkSize, k * chunkSize + chunkSize)
+  );
 }
 
 /**
@@ -418,9 +425,9 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  return Array.from({ length: n }, (e, y) => (
-    Array.from({ length: n }, (el, i) => y === i ? 1 : 0)
-  ));
+  return Array.from({ length: n }, (e, y) =>
+    Array.from({ length: n }, (el, i) => (y === i ? 1 : 0))
+  );
 }
 
 /**
@@ -435,12 +442,12 @@ function getIdentityMatrix(n) {
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
 function getIndicesOfOddNumbers(numbers) {
-  let res = [];
-  numbers.filter((el, i) => {
+  const res = numbers.reduce((acc, el, i) => {
     if (el % 2 === 1) {
-      res.push(i);
+      acc.push(i);
     }
-  });
+    return acc;
+  }, []);
   return res;
 }
 
@@ -456,19 +463,18 @@ function getIndicesOfOddNumbers(numbers) {
  */
 function getHexRGBValues(arr) {
   if (arr.length) {
-    return arr.map(elem => {
-      let n = elem.toString(16);
+    return arr.map((elem) => {
+      const n = elem.toString(16);
       if (n.length === 6) {
         return `#${n}`.toUpperCase();
-      } else if (n.length === 2) {
-        return `#0000${n}`.toUpperCase();
-      } else {
-        return `#000000`;
       }
-    })
-  } else {
-    return [];
+      if (n.length === 2) {
+        return `#0000${n}`.toUpperCase();
+      }
+      return `#000000`;
+    });
   }
+  return [];
 }
 
 /**
@@ -502,7 +508,7 @@ function getMaxItems(arr, n) {
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
 function findCommonElements(arr1, arr2) {
-  return arr1.filter(elem => arr2.includes(elem));
+  return arr1.filter((elem) => arr2.includes(elem));
 }
 
 /**
@@ -517,18 +523,18 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
 function findLongestIncreasingSubsequence(nums) {
-  let res = Array.from({ length: nums.length }).fill(1);
   let length = 1;
-  let a = nums.reduce((acc, elem, i) => {
+  const a = nums.reduce((acc, elem, i) => {
     if (nums[i + 1] > elem) {
       length += 1;
-      res[i] = length;
+      acc.push(length);
     } else {
       length = 1;
-      res[i] = length;
+      acc.push(length);
     }
-  }, [])
-  return Math.max(...res);
+    return acc;
+  }, []);
+  return Math.max(...a);
 }
 
 /**
@@ -548,13 +554,13 @@ function findLongestIncreasingSubsequence(nums) {
 function propagateItemsByPositionIndex(arr) {
   let res = [];
   if (arr.length) {
-    arr.reduce((acc, elem, i) => {
-      res.push(Array.from({ length: i + 1 }).fill(elem))
-    }, [])
+    res = arr.reduce((acc, elem, i) => {
+      acc.push(Array.from({ length: i + 1 }).fill(elem));
+      return acc;
+    }, []);
     return res.flat(undefined);
-  } else {
-    return [];
   }
+  return [];
 }
 
 /**
@@ -572,12 +578,11 @@ function propagateItemsByPositionIndex(arr) {
  */
 function shiftArray(arr, n) {
   if (n < 0) {
-    const items = arr.splice(0, Math.abs(n))
+    const items = arr.splice(0, Math.abs(n));
     return arr.concat(items);
-  } else {
-    const items = arr.splice(-n, n)
-    return items.concat(arr);
   }
+  const items = arr.splice(-n, n);
+  return items.concat(arr);
 }
 
 /**
@@ -594,7 +599,18 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  const example = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  const example = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
   return arr.sort((a, b) => example.indexOf(a) - example.indexOf(b));
 }
 
@@ -621,15 +637,13 @@ function swapHeadAndTail(arr) {
   let n = 0;
   if (arr.length % 2 === 0) {
     n = arr.length / 2;
-    const items = arr.splice(-n, n)
-    return items.concat(arr);
-  } else {
-    n = Math.floor(arr.length / 2);
     const items = arr.splice(-n, n);
-    const midle = arr.splice(-1);
-    return items.concat(midle, arr);
+    return items.concat(arr);
   }
-
+  n = Math.floor(arr.length / 2);
+  const items = arr.splice(-n, n);
+  const midle = arr.splice(-1);
+  return items.concat(midle, arr);
 }
 
 module.exports = {
